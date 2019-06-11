@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 
 export default class Preloader extends React.Component {
     render(){
+        let headers = [<link yeet/>]
         return (
-            <Frame>
-                <div>ya yeet</div>
+            <Frame head={headers}>
             </Frame>
         )
     }
@@ -16,12 +16,13 @@ class Frame extends React.Component {
         super(props)
         this.frameRef = React.createRef()
     }
-    componentWillUpdate(){
+    componentDidMount(){
         this.frameHead = this.frameRef.current.contentDocument.head
+        console.log(this.frameHead)
     }
     render(){
         return <iframe ref={this.frameRef}>
-            {ReactDOM.createPortal(
+            {this.frameHead && ReactDOM.createPortal(
                 this.props.head,
                 this.frameHead
             )}
